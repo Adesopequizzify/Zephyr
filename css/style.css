@@ -1,0 +1,153 @@
+  body {
+    margin: 0;
+    font-family: "Share Tech Mono", monospace;
+    background-image: url('../nex-bg.jpg'); /* Replace with your actual image path */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; 
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    background-color: rgba(42, 10, 68, 0.8); /* Semi-transparent background */
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.balance-container,
+.time-container {
+    display: flex;
+    align-items: center;
+    background-color: rgba(42, 10, 68, 0.8); /* Semi-transparent container */
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: 48%;
+    margin-right: 5px; /* Add margin to create space */
+}
+
+.balance-container:last-child {
+    margin-right: 0; /* Remove margin from the last item */
+}
+
+.balance-container .balance,
+.time-container .time {
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.time-container .icon {
+    margin-right: 5px;
+}
+
+.main-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.coin-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+#farming-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:20px;
+}
+
+.farming-amount {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#start-farming-btn,
+#claim-btn {
+    background-color: #8e44ad;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+    transition: box-shadow 0.3s ease;
+    display: block;
+}
+
+#start-farming-btn:hover,
+#claim-btn:hover {
+    box-shadow: 0 0 10px rgba(255, 0, 255, 1);
+}
+
+footer {
+    background-color: rgba(42, 10, 68, 0.8); /* Semi-transparent purple */
+    width: 100%; 
+    padding: 20px 0; /* Top/bottom padding, no left/right */
+    border-radius: 0 0 10px 10px; /* Curved footer */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-around; 
+    width: 100%; 
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-item .icon {
+    font-size: 28px; /* Larger icons */
+    color: white;
+}
+
+.nav-item span {
+    font-size: 12px; /* Larger labels */
+    margin-top: 5px;
+}
+
+.nav-item.active {
+    background-color: #2a0a44; /* Darker purple background for active item */
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.small {
+    width: 20.5px;
+    height: 20px;
+}
+
+.nexcoin-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: #ffff; /* Gold color */
+    text-shadow: 1px 1px 2px #000; /* Text shadow for better visibility */
+}
