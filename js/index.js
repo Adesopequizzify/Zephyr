@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
   startFarmingBtn.addEventListener("click", () => {
     startFarmingBtn.style.display = "none"; // Hide the Start Farming button
     farmingAmount.style.display = "block"; // Show the farming amount
-    farmingAmount.textContent = `Farming: 0 NX`; // Reset farming amount text
+    farmingAmount.textContent = `Farming: 0 ZPH`; // Reset farming amount text
 
     // Create progress bar
     const progressContainer = document.createElement("div");
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Update farming amount
       let currentFarmingAmount = (farmingReward * progressPercentage / 100).toFixed(2);
-      farmingAmount.textContent = `Farming: ${currentFarmingAmount} NX`;
+      farmingAmount.textContent = `Farming: ${currentFarmingAmount} ZPH`;
       farmingAmount.appendChild(progressContainer); // Re-append to keep structure
 
       // When countdown reaches 0
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
         clearInterval(countdownInterval);
         progressContainer.remove();
         claimBtn.style.display = "block"; // Show Claim button
-        farmingAmount.textContent = `Farming: ${farmingReward.toFixed(2)} NX`; // Final farming amount
+        farmingAmount.textContent = `Farming: ${farmingReward.toFixed(2)} ZPH`; // Final farming amount
         countdownTime = 3600; // Reset countdown time for the next farming session
       }
     }, 1000); // Update every second
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   claimBtn.addEventListener("click", () => {
     initialBalance += farmingReward;
-    balanceSpan.textContent = `${initialBalance.toFixed(2)} NX`;
+    balanceSpan.textContent = `${initialBalance.toFixed(2)} ZPH`;
     claimBtn.style.display = "none";
     startFarmingBtn.style.display = "block"; // Show the Start Farming button again
     farmingAmount.style.display = "none"; // Hide the farming amount
