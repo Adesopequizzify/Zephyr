@@ -1,7 +1,7 @@
   body {
     margin: 0;
     font-family: "Share Tech Mono", monospace;
-    background-image: url('../nex-bg.jpg'); /* Replace with your actual image path */
+    background-image: url('nex-bg.jpg'); /* Replace with your actual image path */
     background-size: cover; /* Cover the entire viewport */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; 
