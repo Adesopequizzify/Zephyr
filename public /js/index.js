@@ -7,8 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const mainContentContainer = document.getElementById('main-content-container');
   const taskContentContainer = document.getElementById('task-content-container');
+  const friendsContentContainer = document.getElementById('friends-content-container');
   const homeTab = document.getElementById('home-tab');
   const taskTab = document.getElementById('task-tab');
+  const friendsTab = document.getElementById('friends-tab');
 
   let initialBalance = 5000;
   let farmingReward = 1500;
@@ -70,15 +72,28 @@ document.addEventListener("DOMContentLoaded", function() {
   homeTab.addEventListener('click', function() {
     mainContentContainer.style.display = 'flex';
     taskContentContainer.style.display = 'none';
+    friendsContentContainer.style.display = 'none';
     homeTab.classList.add('active');
     taskTab.classList.remove('active');
+    friendsTab.classList.remove('active');
   });
 
   taskTab.addEventListener('click', function() {
     mainContentContainer.style.display = 'none';
     taskContentContainer.style.display = 'flex';
+    friendsContentContainer.style.display = 'none';
     homeTab.classList.remove('active');
     taskTab.classList.add('active');
+    friendsTab.classList.remove('active');
+  });
+
+  friendsTab.addEventListener('click', function() {
+    mainContentContainer.style.display = 'none';
+    taskContentContainer.style.display = 'none';
+    friendsContentContainer.style.display = 'flex';
+    homeTab.classList.remove('active');
+    taskTab.classList.remove('active');
+    friendsTab.classList.add('active');
   });
 
   updateTimer(); // Initialize the timer display
