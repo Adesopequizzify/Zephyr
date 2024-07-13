@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", function() {
   const balanceSpan = document.querySelector(".balance");
   const timeContainer = document.querySelector(".time-container .time");
 
+  const mainContentContainer = document.getElementById('main-content-container');
+  const taskContentContainer = document.getElementById('task-content-container');
+  const homeTab = document.getElementById('home-tab');
+  const taskTab = document.getElementById('task-tab');
+
   let initialBalance = 5000;
   let farmingReward = 1500;
   let countdownTime = 3600; // 1 hour in seconds
@@ -60,6 +65,20 @@ document.addEventListener("DOMContentLoaded", function() {
     claimBtn.style.display = "none";
     startFarmingBtn.style.display = "block"; // Show the Start Farming button again
     farmingAmount.style.display = "none"; // Hide the farming amount
+  });
+
+  homeTab.addEventListener('click', function() {
+    mainContentContainer.style.display = 'flex';
+    taskContentContainer.style.display = 'none';
+    homeTab.classList.add('active');
+    taskTab.classList.remove('active');
+  });
+
+  taskTab.addEventListener('click', function() {
+    mainContentContainer.style.display = 'none';
+    taskContentContainer.style.display = 'flex';
+    homeTab.classList.remove('active');
+    taskTab.classList.add('active');
   });
 
   updateTimer(); // Initialize the timer display
