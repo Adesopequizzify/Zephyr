@@ -1,3 +1,7 @@
+import { firebaseConfig } from './firebaseConfig.js'; // Update the path if necessary
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js"; // Import Firebase Auth providers
+
 document.addEventListener("DOMContentLoaded", function() {
     const farmingAmount = document.querySelector(".farming-amount");
     const startFarmingBtn = document.getElementById("start-farming-btn");
@@ -101,6 +105,64 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     updateTimer(); // Initialize the timer display
+
+    // Firebase Authentication
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const userInfoContainer = document.querySelector('.user-info-container');
+
+    // Check if user is authenticated on page load
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            // User is signed in
+            displayUserInfo(user);
+        } else {
+            // No user is signed in, show sign-in popup
+            openPopup();
+        }
+    });
+
+    // Google Sign-In
+    document.getElementById('google-signin').addEventListener('click', () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                displayUserInfo(user);
+                closePopup();
+            })
+            .catch((error) => {
+                console.error('Error signing in with Google:', error);
+            });
+    });
+
+    // Facebook Sign-In
+    document.getElementById('facebook-signin').addEventListener('click', () => {
+        const provider = new FacebookAuthProvider();
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                displayUserInfo(user);
+                closePopup();
+            })
+            .catch((error) => {
+                console.error('Error signing in with Facebook:', error);
+            });
+    });
+
+    function displayUserInfo(user) {
+        // Display user information in the user-info-container
+        userInfoContainer.innerHTML = `<p>Welcome, ${user.displayName}</p>`;
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+
+    // Function to open the popup (for demonstration purposes)
+    function openPopup() {
+        document.getElementById('popup').style.display = 'flex';
+    }
 
     // Notification Popup
     const notificationPopup = document.getElementById('notification-popup');
