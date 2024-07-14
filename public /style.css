@@ -322,4 +322,136 @@ footer {
 
 .copy-referral-link:hover {
   background-color: #0056b3;
+  
+}.user-info-container {
+    display: flex;
+    align-items: center;
+    background-color: rgba(42, 10, 68, 0.8); /* Semi-transparent container */
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-right: 5px; /* Add margin to create space */
+    height:25px;
+}
+
+.user-info-container img.small {
+    width: 20.5px;
+    height: px;
+    margin-right: 5px;
+}
+
+.user-info-container .username {
+    font-size: 18px;
+    color: white;
+    margin-left: 10px;
+}
+
+.notification-popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    background-color: rgba(42, 10, 68, 0.9); /* Semi-transparent background */
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: white;
+    font-family: "Share Tech Mono", monospace;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.notification-content {
+    position: relative;
+}
+
+.close-notification-btn {
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-notification-btn:hover,
+.close-notification-btn:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#notification-message {
+    margin: 0;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.signin-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.signin-option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.icon-container {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.icon-container img {
+  width: 100%;
+  height: 100%;
+}
+
+.signin-option p {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Adjustments for mobile responsiveness */
+@media (max-width: 400px) {
+  .popup-content {
+    width: 90%;
+  }
 }
