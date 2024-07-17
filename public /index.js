@@ -1,8 +1,9 @@
 // index.js
 
+import { doc, updateDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 import { auth, signInWithGoogle, signInWithFacebook, displayUserInfo, setupUserListener } from './auth.js';
-import { startFarming, claimRewards, checkFarmingProgress } from './game.js';
-import { updateTimer, showNotification, closeSignInPopup } from './ui.js';
+import { checkFarmingProgress, startFarming, claimRewards } from './game.js';
+import { updateUserUI, showNotification, closeSignInPopup } from './ui.js';
 
 document.addEventListener("DOMContentLoaded", function() {
   const startFarmingBtn = document.getElementById("start-farming-btn");
@@ -22,11 +23,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  auth.onAuthStateChanged(user => {
+  auth.onAuthStateChanged(async (user) => {
     if (user) {
       displayUserInfo(user);
       closeSignInPopup(); // Close the popup if the user is already signed in
-      setupUserListener(user.uid); // Set up real-time listener for user data
+      await setupUserListener(user.uid); // Set up real-time listener for user data
+      await checkFarmingProgress(user); // Check farming progress after authentication
     } else {
       document.getElementById('popup').style.display = 'flex';
     }

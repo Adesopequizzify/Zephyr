@@ -60,6 +60,7 @@ async function handleNewUser(user) {
       userId: user.uid,
       balance: 1000, // Default balance for new users
       level: 1,
+      dailyAirdropClaims: 0,
       session: new Date().toISOString(),
     });
   }

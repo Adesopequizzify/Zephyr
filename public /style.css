@@ -515,3 +515,101 @@ h2 {
     background-color: rgba(255, 255, 255, 0.2); /* Transparent white fill */
     transition: width 1s linear; /* Optional: Smooth animation */
 }
+
+/* Balance Container */
+.balance-container {
+  display: flex;
+  align-items: center;
+  background-color: rgba(42, 10, 68, 0.8);
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.balance-container .balance {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+/* Level Container */
+.level-container {
+  display: flex;
+  align-items: center;
+  background-color: rgba(42, 10, 68, 0.8);
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.level-container .level {
+  font-size: 18px;
+}
+
+/* Coin Image */
+.coin-image img {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Progress Bar */
+.progress-container {
+  width: 100%;
+  height: 30px;
+  background-color: #2a0a44;
+  border-radius: 5px;
+  margin-top: 20px; /* Add spacing from the coin image */
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+}
+
+.progress-bar {
+  width: 100%;
+  height: 100%;
+  background-color: #2a0a44; /* Initial background color */
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%; /* Initial width */
+  background-color: #8e44ad; /* Purple fill color */
+  transition: width 1s linear;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  z-index: 1; /* Ensure text is on top */
+}
+
+.progress-text .farming-amount {
+  display: inline; /* Show the amount by default */
+}
+
+.progress-text .time {
+  display: inline; /* Show the time by default */
+}
+
+/* Buttons */
+#start-farming-btn,
+#claim-btn {
+  background-color: #8e44ad; /* Purple button color */
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px; /* Add spacing above buttons */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#start-farming-btn:hover,
+#claim-btn:hover {
+  background-color: #682e8a; /* Slightly darker purple on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Increased shadow on hover */
+}
