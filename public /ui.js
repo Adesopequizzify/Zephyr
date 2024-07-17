@@ -68,9 +68,6 @@ async function updateUserUI(userData) {
     progressContainer.style.display = 'block';
     farmingAmountSpan.parentElement.style.display = 'block';
     timeSpan.parentElement.style.display = 'block';
-
-    // Start or update farming progress if user is farming
-    await startFarming(userData);
   } else {
     startFarmingBtn.style.display = 'block';
     claimBtn.style.display = userData.roundProgress >= ROUND_DURATION && userData.dailyAirdropClaims < MAX_DAILY_CLAIMS ?

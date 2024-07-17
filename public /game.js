@@ -1,6 +1,6 @@
 import { db } from './firebase.js';
 import { doc, updateDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
-import { updateUserUI, showNotification } from './ui.js';
+import { showNotification, updateUserUI } from './ui.js';
 
 const ROUND_DURATION = 7 * 60 * 60; // 7 hours in seconds
 const REWARDS_PER_ROUND = 2500; // Fixed reward per round
@@ -11,12 +11,6 @@ let farmingInterval = null;
 async function startFarming(user) {
   const userDoc = doc(db, 'users', user.uid);
   const userSnapshot = await getDoc(userDoc);
-
-  if (!userSnapshot.exists()) {
-    console.error('User document not found');
-    return;
-  }
-
   const userData = userSnapshot.data();
 
   // Check if the previous round's reward has been claimed
@@ -46,7 +40,7 @@ async function startFarming(user) {
   // Update userData for UI and start interval
   userData.farming = true;
   userData.roundProgress = roundProgress;
-  await updateDoc(userDoc, userData); // Update user data in Firestore
+  updateUserUI(userData);
 
   // Hide start button, show claim button if round is complete
   startFarmingBtn.style.display = 'none';
@@ -55,7 +49,13 @@ async function startFarming(user) {
   // Start farming interval
   farmingInterval = setInterval(async () => {
     roundProgress += 1;
-    updateProgressUI(roundProgress); // Update UI
+
+    // Calculate farmingAmount and update UI
+    const farmingAmount = Math.floor((roundProgress / ROUND_DURATION) * REWARDS_PER_ROUND);
+    farmingAmountSpan.textContent = farmingAmount; // Update the farmingAmountSpan
+    farmingAmountSpan.textContent = `Farming: ${farmingAmount} ZPH`;
+
+    updateProgressUI(roundProgress, farmingAmount); // Update UI with farmingAmount
 
     // Check if round completed
     if (roundProgress >= ROUND_DURATION) {
@@ -64,13 +64,13 @@ async function startFarming(user) {
 
       // Update userData for UI (roundProgress remains the same)
       userData.farming = false;
-      await updateDoc(userDoc, userData); // Update user data in Firestore
       updateUserUI(userData); // Update UI after Firestore update
     }
 
-    // Update session in Firestore
+    // Update session and farming amount in Firestore
     await updateDoc(userDoc, {
       roundProgress: roundProgress,
+      farmingAmount: farmingAmount,
       session: new Date().toISOString(),
     });
   }, 1000);
@@ -170,7 +170,7 @@ async function checkFarmingProgress(user) {
   });
 
   // Call the updateProgressUI function to update the UI
-  updateProgressUI(roundProgress); // Update UI
+  updateProgressUI(roundProgress, userData.farmingAmount); // Update UI with farmingAmount
 }
 
 function isSameDay(date1, date2) {
@@ -179,12 +179,14 @@ function isSameDay(date1, date2) {
     date1.getFullYear() === date2.getFullYear();
 }
 
-// update progress UI helper function
-function updateProgressUI(roundProgress) {
+// Update progress UI helper function
+function updateProgressUI(roundProgress, farmingAmount) {
   const progressFill = document.querySelector('.progress-fill');
   const progressContainer = document.querySelector('.progress-container');
   const claimBtn = document.getElementById('claim-btn');
   const startFarmingBtn = document.getElementById('start-farming-btn');
+  const farmingAmountSpan = document.querySelector('.progress-text .farming-amount');
+  const farmingAmountText = document.querySelector('.farming-amount');
 
   if (roundProgress >= ROUND_DURATION) {
     progressFill.style.width = '100%'; // Fill progress bar completely
@@ -203,6 +205,10 @@ function updateProgressUI(roundProgress) {
   } else {
     progressContainer.style.display = 'none';
   }
+
+  // Update the farming amount text
+  farmingAmountSpan.textContent = farmingAmount;
+  farmingAmountText.textContent = `Farming: ${farmingAmount} ZPH`;
 }
 
 export { startFarming, claimRewards, checkFarmingProgress, ROUND_DURATION, MAX_DAILY_CLAIMS };
