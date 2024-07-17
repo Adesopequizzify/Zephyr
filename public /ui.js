@@ -11,6 +11,7 @@ const friendsContentContainer = document.getElementById('friends-content-contain
 const homeTab = document.getElementById('home-tab');
 const taskTab = document.getElementById('task-tab');
 const friendsTab = document.getElementById('friends-tab');
+const progressFill = document.querySelector('.progress-fill'); // Add this line to access the progress bar
 
 function updateTimer(countdownTime) {
   const hours = String(Math.floor(countdownTime / 3600)).padStart(2, '0');
@@ -54,6 +55,21 @@ function closeSignInPopup() {
 function updateUserUI(userData) {
   balanceSpan.textContent = `${userData.balance} ZPH`;
   farmingAmount.textContent = `Farming: ${userData.farmingAmount || 0} ZPH`;
+
+  // Adjust UI based on farming state
+  if (userData.farming) {
+    startFarmingBtn.style.display = 'none'; // Hide start farming button
+    claimBtn.style.display = userData.roundProgress >= ROUND_DURATION ? 'block' : 'none'; // Show claim button if round completed
+    progressFill.parentElement.style.display = 'block'; // Show progress bar container
+
+    // Update progress bar width based on round progress
+    const progressWidth = (userData.roundProgress / ROUND_DURATION) * 100;
+    progressFill.style.width = `${progressWidth}%`;
+  } else {
+    startFarmingBtn.style.display = 'block'; // Show start farming button
+    claimBtn.style.display = 'none'; // Hide claim button
+    progressFill.parentElement.style.display = 'none'; // Hide progress bar container
+  }
 }
 
 export { updateTimer, showNotification, closeSignInPopup, updateUserUI };
