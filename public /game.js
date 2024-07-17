@@ -51,8 +51,8 @@ async function startFarming(user) {
     roundProgress += 1;
 
     // Calculate farmingAmount and update UI
-    const farmingAmount = Math.floor((roundProgress / ROUND_DURATION) * REWARDS_PER_ROUND);
-    farmingAmountSpan.textContent = farmingAmount; // Update the farmingAmountSpan
+    const farmingAmount = ((roundProgress / ROUND_DURATION) * REWARDS_PER_ROUND).toFixed(3); // Display 3 decimal places
+    farmingAmountSpan.textContent = farmingAmount;
     farmingAmountSpan.textContent = `Farming: ${farmingAmount} ZPH`;
 
     updateProgressUI(roundProgress, farmingAmount); // Update UI with farmingAmount
