@@ -1,3 +1,5 @@
+// ui.js
+
 const farmingAmount = document.querySelector(".farming-amount");
 const startFarmingBtn = document.getElementById("start-farming-btn");
 const claimBtn = document.getElementById("claim-btn");
@@ -44,4 +46,14 @@ function showNotification(message) {
   setTimeout(() => notificationPopup.style.display = 'none', 3000);
 }
 
-export { updateTimer, showNotification };
+function closeSignInPopup() {
+  const popup = document.getElementById('popup');
+  popup.style.display = 'none';
+}
+
+function updateUserUI(userData) {
+  balanceSpan.textContent = `${userData.balance} ZPH`;
+  farmingAmount.textContent = `Farming: ${userData.farmingAmount || 0} ZPH`;
+}
+
+export { updateTimer, showNotification, closeSignInPopup, updateUserUI };
