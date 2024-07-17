@@ -1,6 +1,9 @@
-// ui.js
-import { startFarming, claimRewards, checkFarmingProgress, ROUND_DURATION, MAX_DAILY_CLAIMS } from './game.js';
 
+
+// Import necessary functions/constants
+import { startFarming, claimRewards, MAX_DAILY_CLAIMS, ROUND_DURATION } from './game.js'; 
+
+// DOM element references
 const balanceSpan = document.querySelector(".balance");
 const levelSpan = document.querySelector('.level');
 const mainContentContainer = document.getElementById('main-content-container');
@@ -14,6 +17,7 @@ const claimBtn = document.getElementById('claim-btn');
 const progressContainer = document.querySelector('.progress-container');
 const farmingAmountSpan = document.querySelector('.farming-amount');
 const timeSpan = document.querySelector('.time');
+const userInfoContainer = document.querySelector('.user-info-container'); // Added for the welcome message
 
 // Tab switching logic
 homeTab.addEventListener('click', () => showTab('home'));
@@ -21,15 +25,21 @@ taskTab.addEventListener('click', () => showTab('task'));
 friendsTab.addEventListener('click', () => showTab('friends'));
 
 function showTab(tabName) {
+  // Show/hide main content based on tabName
   mainContentContainer.style.display = tabName === 'home' ? 'flex' : 'none';
   taskContentContainer.style.display = tabName === 'task' ? 'flex' : 'none';
   friendsContentContainer.style.display = tabName === 'friends' ? 'flex' : 'none';
+
+  // Activate/deactivate tabs based on tabName
   homeTab.classList.toggle('active', tabName === 'home');
   taskTab.classList.toggle('active', tabName === 'task');
   friendsTab.classList.toggle('active', tabName === 'friends');
+
+  // Show/hide welcome message based on tabName
+  userInfoContainer.style.display = tabName === 'home' ? 'flex' : 'none';
 }
 
-// Notification popup logic
+// Notification popup logic (assuming this logic is handled elsewhere)
 const notificationPopup = document.getElementById('notification-popup');
 const closeNotificationBtn = document.querySelector('.close-notification-btn');
 const notificationMessage = document.getElementById('notification-message');
@@ -44,7 +54,7 @@ function showNotification(message) {
   setTimeout(() => notificationPopup.style.display = 'none', 3000);
 }
 
-// Close sign-in popup 
+// Close sign-in popup (assuming this logic is handled elsewhere)
 function closeSignInPopup() {
   const popup = document.getElementById('popup');
   popup.style.display = 'none';
@@ -84,5 +94,5 @@ async function updateUserUI(userData) {
 startFarmingBtn.addEventListener('click', () => startFarming());
 claimBtn.addEventListener('click', () => claimRewards());
 
-// Exported constants and functions
+// Export constants and functions
 export { showNotification, closeSignInPopup, updateUserUI, MAX_DAILY_CLAIMS, ROUND_DURATION };
